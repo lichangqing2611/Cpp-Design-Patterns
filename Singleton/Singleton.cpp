@@ -2,7 +2,7 @@
 
 class Singleton{
 private:
-    Singleton();
+    Singleton();  // C++中每个类都有 默认构造器 和 拷贝构造器，如果没写也会默认创建。
     Singleton(const Singleton& other);
 public:
     static Singleton* getInstance();
@@ -11,7 +11,7 @@ public:
 
 Singleton* Singleton::m_instance=nullptr;
 
-//线程非安全版本
+//线程非安全版本：在单线程中可以使用
 Singleton* Singleton::getInstance() {
     if (m_instance == nullptr) {
         m_instance = new Singleton();
@@ -24,7 +24,7 @@ Singleton* Singleton::getInstance() {
 
 
 
-//线程安全版本，但锁的代价过高
+//线程安全版本，但锁的代价过高：在多线程且对性能要求不高的场合下可以使用
 Singleton* Singleton::getInstance() {
     Lock lock;
     if (m_instance == nullptr) {
@@ -41,7 +41,7 @@ Singleton* Singleton::getInstance() {
 
 
 
-//双检查锁，但由于内存读写reorder不安全
+//双检查锁，但由于内存读写reorder不安全：多线程场合下不能使用
 Singleton* Singleton::getInstance() {
     
     if(m_instance==nullptr){
@@ -60,7 +60,7 @@ Singleton* Singleton::getInstance() {
 
 
 
-//C++ 11版本之后的跨平台实现 (volatile)
+//C++ 11版本之后的跨平台实现 (volatile)：多线程且对性能要求高的场合，可以使用
 std::atomic<Singleton*> Singleton::m_instance;
 std::mutex Singleton::m_mutex;
 
