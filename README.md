@@ -92,8 +92,6 @@
 ### 领域问题：
 + [Interpreter](https://github.com/lichangqing2611/Cpp-Design-Patterns/tree/master/Interpreter)
 
-
-## 总结
 ### 现代较少用的模式
 + Builder
 + Mediator
@@ -103,3 +101,11 @@
 + Command
 + Visitor
 + Interpreter
+
+## 什么时候不用设计模式
+1. 代码可读性很差时
+2. 需要理解还很浅时
+3. 变化没有显现时
+4. 不是系统的关键依赖点
+5. 项目没有复用价值时
+6. 项目将要发布时
